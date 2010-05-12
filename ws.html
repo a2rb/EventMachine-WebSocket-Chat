@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js'></script>
+    <script>
+      $(document).ready(function(){
+        function debug(str){ $("#debug").append("<p>"+str+"</p>"); };
+ 
+        debug("Starting up");
+        var ws = new WebSocket("ws://localhost:8080");
+        debug("We have ws");
+        ws.onmessage = function(evt) { $("#msg").append("<p>"+evt.data+"</p>"); };
+        ws.onclose = function() { debug("socket closed"); };
+        ws.onopen = function() {
+          debug("connected...");
+          ws.send("hello server");
+        };
+
+        $('#sendbtn').click(function() {
+	        ws.send($('#sendmsg')[0].value);
+        });
+      });
+    </script>
+  </head>
+  <body>
+	  <h2>Send<h2>
+			<form>
+			  <input type='text' name="sendmsg" id='sendmsg' title="Message" />
+			  <input type='button' value='send' id='sendbtn' />
+			</form>
+
+		<h2>Msg</h2>
+    <div id="msg"></div>
+
+	  <h2>Debug</h2>
+    <div id="debug"></div>
+
+  </body>
+</html>

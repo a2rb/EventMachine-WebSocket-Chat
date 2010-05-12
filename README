@@ -1,0 +1,3 @@
+This code is based on code from this blog entry: http://www.igvita.com/2009/12/22/ruby-websockets-tcp-for-the-browser/
+
+We used this code to walk through eventmachine during our 11 May 2010 meeting. 
